@@ -1,5 +1,10 @@
 {
    "token": "NDIxNzY2NzY3NjczODY4MzA4.DYSHtw.1o9SzP_grANnDJiRJDkfuVfGpB8",
-   "username" : "PrettyJohn",
-   "prefix":"!"
+   "prefix":"!",
+   "admIDs": ["280055859621658625","313106234280640512"],
+   "error" : {
+   				"general": ":scream: :scream:  Ocorreu um erro :scream: :scream: ",
+   				"command": ":scream:  Comando não encontrado :scream:",
+   				"permission" : ":rage::rage: VAI PARANDO POR AI :hand_splayed::hand_splayed: VOCE NÃO PODE FAZER ISSO"
+   			}
 }
