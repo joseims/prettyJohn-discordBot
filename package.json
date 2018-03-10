@@ -1,0 +1,10 @@
+{
+  "name": "pretty-john",
+  "version": "1.0.0",
+  "description": "john u r beatiful",
+  "main": "bot.js",
+  "author": "Zeso",
+  "dependencies": {
+    "discord.js": "^11.3.2"
+  }
+}
