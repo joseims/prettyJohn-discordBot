@@ -1,0 +1,49 @@
+Arguments: 
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add ffmpeg-binariesD
+
+PATH: 
+  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  9.8.0
+
+Platform: 
+  linux x64
+
+npm manifest: 
+  {
+    "name": "pretty-john",
+    "version": "1.0.0",
+    "description": "john u r beatiful",
+    "main": "bot.js",
+    "author": "Zeso",
+    "dependencies": {
+      "discord.js": "^11.3.2",
+      "npm": "^5.7.1"
+    },
+    "engines": {
+      "node": "9.8.0"
+    },
+    "scripts": {
+      "start": "node bot.js"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Couldn't find package "ffmpeg-binariesD" on the "npm" registry.
+      at new MessageError (/usr/share/yarn/lib/cli.js:186:110)
+      at NpmResolver.<anonymous> (/usr/share/yarn/lib/cli.js:51625:15)
+      at Generator.next (<anonymous>)
+      at step (/usr/share/yarn/lib/cli.js:98:30)
+      at /usr/share/yarn/lib/cli.js:109:13
+      at <anonymous>
+      at process._tickCallback (internal/process/next_tick.js:118:7)

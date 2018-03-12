@@ -77,6 +77,73 @@ var kick = function kick(message) {
 
 };
 
+
+var interruptAllow = function interrupt(message,args,options) {
+
+
+	var member = message.mentions.members.first();
+
+
+
+
+	if (!member || !member.voiceChannel) return;
+
+
+	if (options.isInterrupting) {
+		if (options.interruptChannelID == member.voiceChannel.id) {
+
+			if (!options.interruptIDs.includes(member.id)) {
+				options.interruptIDs.push(member.id);
+				message.channel.send(`:smiling_imp:  <@${member.id}>`)
+
+			} else {
+				var index = options.interruptIDs.indexOf(member.id);
+				options.interruptIDs.splice(index,1);
+				message.channel.send(`:angel:   <@${member.id}>`);
+
+				if (options.interruptIDs.length == 0 ) {
+					options.isInterrupting = false;
+					member.voiceChannel.leave();
+				}
+			}
+
+		} else {
+
+			message.channel.send(`Já estou atrapalhando em outro canal`);
+		}
+
+	} else {
+		options.isInterrupting = true;
+		options.interruptChannelID = member.voiceChannel.id;
+		options.interruptIDs.push(member.id);
+		message.channel.send(`:smiling_imp:  <@${member.id}>`);
+		member.voiceChannel.join().then(connection => {
+			connection.on('speaking', user =>  {
+				if (options.interruptIDs.includes(user.id)) {
+					    const dispatcher = connection.playFile('./eaiMens.ogg');
+					    dispatcher.on('start',() => {
+					       connection.player.streamingData.pausedTime = 0;
+					    });
+				}
+			});
+		});
+	}
+
+};
+
+
+var play = function play (message,args,options) {
+	var broadcast = options.broadcast;
+	for (const connection of options.voiceConnections.values()) {
+		connection.playFile('./eaiMens.ogg');
+  	}
+}
+
+
+
+ 
+
+
 exports.any = {};
 exports.adm = {};
 //commands
@@ -84,9 +151,11 @@ exports.adm = {};
 exports.any.textao = getText;
 exports.any.randtext = getRandText;
 exports.any.textkeys = getTextKeys;
+exports.any.play = play;
 	//adm
 exports.adm.allow = toggleAllow;
 exports.adm.kick = kick;
+exports.adm.interrupt = interruptAllow;
 
 //others 
 exports.any.prettyJohn = prettyJohn;

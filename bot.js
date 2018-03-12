@@ -11,25 +11,39 @@ var error = config.error;
 
 
 
+
+
 // Initialize Discord Bot
 var bot = new Discord.Client();
 
 //initializing global variables
 var options = {};
 options.prettyAllow = true;
-
+options.interruptIDs = [];
+options.interruptChannelID = "";
+options.isInterrupting = false;
 
 bot.on('ready', () => {
     console.log('Connected');
 });
 
+bot.on('any', a => {
+   console.log(a);
+});
+
+
 
 bot.on('message', message => {   
+
+
 
 
     const author = message.author;
 
     if (author.bot || message.channel.type === "dm") return;
+
+    console.log(message.content);
+
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     //criar variavel para parametros globais
@@ -39,13 +53,14 @@ bot.on('message', message => {
 
     commands.any.prettyJohn(message,args,options);
 
-
     if (message.content.indexOf(prefix) !== 0) return;
 
 
     //General Commands
 
-    
+    options.broadcast = bot.createVoiceBroadcast().playFile('./teste.mp3');;
+    options.voiceConnections = bot.voiceConnections;
+
     if (typeof commands.adm[command] != 'undefined') {
 
         if (isAdm(author.id)) {
@@ -64,8 +79,8 @@ bot.on('message', message => {
 
 
     } else {
-
-        message.channel.send(error.command);
+        console.log('1')
+        message.channel.send(error.commandNotFound);
     
     }
 
@@ -83,13 +98,4 @@ function isAdm(userID) {
 
 
 
-
-
 bot.login(token);
-
-
-
-
-
-
-
